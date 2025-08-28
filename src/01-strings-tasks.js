@@ -67,7 +67,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-  return value.slice(6, -1);
+  return value.slice(7, -1);
 }
 
 /**
@@ -209,8 +209,8 @@ function getRectangleString(width, height) {
   const baseLine = `│${' '.repeat(width - 2)}│\n`;
   let result = topLine;
   for (let i = 1; i < height - 1; i += 1) {
-        result += baseLine;
-    }
+    result += baseLine;
+  }
 
   result += `└${'─'.repeat(width - 2)}┘\n`;
   return result;
@@ -233,25 +233,28 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const lower = 'abcdefghijklmnopqrstuvwxyz';
+  const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const lower = 'abcdefghijklmnopqrstuvwxyz';
 
-    const upperRot = 'NOPQRSTUVWXYZABCDEFGHIJKLM';
-    const lowerRot = 'nopqrstuvwxyzabcdefghijklm';
+  const upperRot = 'NOPQRSTUVWXYZABCDEFGHIJKLM';
+  const lowerRot = 'nopqrstuvwxyzabcdefghijklm';
 
-    return str.split('').map(char => {
-        const upperIndex = upper.indexOf(char);
-        if (upperIndex !== -1) {
-            return upperRot[upperIndex];
-        }
+  return str
+    .split('')
+    .map((char) => {
+      const upperIndex = upper.indexOf(char);
+      if (upperIndex !== -1) {
+        return upperRot[upperIndex];
+      }
 
-        const lowerIndex = lower.indexOf(char);
-        if (lowerIndex !== -1) {
-            return lowerRot[lowerIndex];
-        }
+      const lowerIndex = lower.indexOf(char);
+      if (lowerIndex !== -1) {
+        return lowerRot[lowerIndex];
+      }
 
-        return char;
-    }).join('');
+      return char;
+    })
+    .join('');
 }
 
 /**
@@ -268,7 +271,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  if (typeof value === 'string'){
+  if (typeof value === 'string' || value instanceof String) {
     return true;
   }
   return false;
@@ -299,14 +302,64 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-  const arr = ['A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
-        'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
-        'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
-        'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠'];
+  const arr = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
 
   let index;
 
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i += 1) {
     if (arr[i] === value) {
       index = i;
     }
